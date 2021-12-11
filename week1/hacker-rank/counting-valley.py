@@ -11,5 +11,3 @@ def countingValleys(steps, path):
             level += 1
     return valleys
         
-
-print(countingValleys(8, "UDDDUDUU"))
