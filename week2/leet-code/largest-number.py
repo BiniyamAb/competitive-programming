@@ -1,4 +1,9 @@
 def largestNumber(nums):
+    # these only works in python2
+    """
+    :type nums: List[int]
+    :rtype: str
+    """
     zeros = True
     for val in nums:
         if val != 0:
