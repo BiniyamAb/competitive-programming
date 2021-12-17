@@ -1,35 +1,36 @@
-# from typing import List
+from typing import List
 
-# def findOriginalArray(changed: List[int]) -> List[int]:
-#     doubled = []
-#     doubles = []
-#     frequencyArr = [0] * 100001
-#     for i in range(len(changed)):
-#         frequencyArr[changed[i]]+=1
+def findOriginalArray(changed: List[int]) -> List[int]:
+    freqDict = {}
+    changed.sort()
+    if len(changed) % 2 != 0:
+        return []
+    for i in range(len(changed)):
+        freqDict[changed[i]] = freqDict.get(changed[i], 0) + 1
     
-#     for val in changed:
-#         if frequencyArr[val * 2] != 0:
-#             doubled.append(val)
-#         else:
-#             doubles.append(val)
+    if freqDict.get(0):
+        if freqDict[0] % 2 == 0:
+            freqDict[0] //= 2
+        else:
+            return []
+    for k in list(freqDict):
+        if k == 0:
+            continue
+        m = freqDict[k]
+        while m > 0:
+            if freqDict.get(k * 2) and freqDict[k * 2] > 0 and freqDict[k] > 0:
+                freqDict[k * 2] -= 1
+            elif k % 2 == 0 and freqDict.get(k // 2) and freqDict[k // 2] > 0:
+                pass
+            else:
+                return []
+            m-=1
 
-#     for val in doubles:
-#         if val == 0:
-#             if frequencyArr[0] < 2:
-#                 return []
-#         if val % 2 != 0:
-#             return []
-#         elif frequencyArr[val // 2] == 0:
-#             return []
-    
-
-# #     return doubled
+    original = []
+    for k, v in freqDict.items():
+        if v!=0:
+            for i in range(v):
+                original.append(k)
         
             
-
-
-# # print(findOriginalArray([1,3,4,2,6,8]))
-# to= {}
-# to[1] = 2
-# to[2] = 4
-# to[4] = 8
+    return original    
