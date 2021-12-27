@@ -1,3 +1,5 @@
+from typing import List
+
 class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
         monoStack = []
@@ -9,7 +11,6 @@ class Solution:
                 res[monoStack[-1]] = i - monoStack[-1]
                 monoStack.pop()
                 
-            monoStack.append(i)
         
         for i in range(len(monoStack)):
             res[monoStack[i]] = 0
